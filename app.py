@@ -25,11 +25,37 @@ def health():
     })
 
 
-@app.get('/predict')
+@app.post('/predict')
 def predict_heart_disease(user:PatientModel):
+    input_data = {
+    "Age": user.age,
+    "Sex": user.gender,
+    "ChestPainType": user.chest_pain_type,
+    "RestingBP": user.resting_bp,
+    "Cholesterol": user.cholesterol,
+    "FastingBS": user.fasting_bs,
+    "RestingECG": user.resting_ecg,
+    "MaxHR": user.max_hr,
+    "ExerciseAngina": user.exercise_angina,
+    "Oldpeak": user.oldpeak,
+    "ST_Slope": user.st_slope
+    }
     try:
-        prediction = predict_output(user)
-        return JSONResponse(status_code=200,content=[f'Disease risk: {prediction}'])
+        prediction = predict_output(input_data)
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                "prediction": prediction,
+                "message": "Heart disease detected"
+                if prediction == 1
+                else "No heart disease detected"
+            }
+        )
+
     except Exception as e:
-        return JSONResponse(status_code=500,content=str(e))
+        return JSONResponse(
+            status_code=500,
+            content={"error": str(e)}
+        )
 
