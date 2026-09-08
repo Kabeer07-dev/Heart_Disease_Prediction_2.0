@@ -257,15 +257,14 @@ def render_developer_section():
                 <span class="dev-tag">📈 Data Science</span>
             </div>
             <div class="dev-link-row">
-                <a class="dev-link" href="#" target="_blank">🐙 GitHub — add your profile URL</a>
-                <a class="dev-link" href="#" target="_blank">💼 LinkedIn — add your profile URL</a>
-                <a class="dev-link" href="#" target="_blank">✉️ Email — add your email address</a>
+                <a class="dev-link" href="https://github.com/Kabeer07-dev" target="_blank">🐙 GitHub</a>
+                <a class="dev-link" href="https://www.linkedin.com/in/muhammad-kabeer-62b705352/" target="_blank">💼 LinkedIn</a>
+                <a class="dev-link" href="mailto:kb3463217@gmail.com" target="_blank">✉️ Email</a>
             </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-
 
 def render_footer():
     st.markdown(
