@@ -11,10 +11,8 @@ def predict_output(user_input: dict):
 
     input_df = pd.DataFrame([user_input])
 
-    # Encode categorical variables
     input_df = pd.get_dummies(input_df)
 
-    # Exact columns used during training
     expected_columns = [
         "Age",
         "RestingBP",
@@ -33,12 +31,21 @@ def predict_output(user_input: dict):
         "ST_Slope_Up"
     ]
 
-    # Make prediction dataframe identical to training dataframe
     input_df = input_df.reindex(
         columns=expected_columns,
         fill_value=False
     )
 
+    # Prediction: 0 or 1
     prediction = rf_model.predict(input_df)[0]
 
-    return int(prediction)
+    # Probability of each class
+    probabilities = rf_model.predict_proba(input_df)[0]
+
+    # Probability of class 1 (Heart Disease)
+    heart_disease_probability = probabilities[1]
+
+    return {
+        "prediction": int(prediction),
+        "probability": float(heart_disease_probability)
+    }
