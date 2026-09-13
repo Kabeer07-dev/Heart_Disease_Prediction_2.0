@@ -1,21 +1,9 @@
-"""
-Streamlit UI for the Heart Disease Prediction project.
-
-Run with:
-    streamlit run streamlit_app/app.py
-
-This file only handles layout/flow. All prediction logic lives, unmodified,
-in model/model.py; utils.py just translates UI-friendly field names
-(e.g. "Gender") into the exact schema the trained model expects (e.g. "Sex").
-"""
-
 import sys
 from pathlib import Path
 
 import streamlit as st
 
-# Allow `import utils` / `import components` regardless of the directory
-# `streamlit run` is launched from.
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from styles import CUSTOM_CSS
